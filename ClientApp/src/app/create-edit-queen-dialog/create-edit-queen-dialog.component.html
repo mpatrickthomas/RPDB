@@ -1,0 +1,62 @@
+<h1 mat-dialog-title *ngIf="data.queen.name; else newQueen">Let's talk about {{data.queen.name}}</h1>
+<ng-template #newQueen><h1 mat-dialog-title>Create a queen!</h1></ng-template>
+
+<div mat-dialog-content style="margin: 0 auto">
+  <!-- Name -->
+  <mat-form-field appearance="outline">
+    <mat-label>What's her name?</mat-label>
+    <input matInput [(ngModel)]="data.queen.name" />
+    <button mat-button *ngIf="data.queen.name" matSuffix mat-icon-button aria-label="clear" (click)="data.queen.name=''">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-form-field>
+  
+  <!-- Hometown -->
+  <mat-form-field appearance="outline">
+    <mat-label>Where's she from</mat-label>
+    <input matInput [(ngModel)]="data.queen.hometown"/>
+    <button mat-button *ngIf="data.queen.hometown" matSuffix mat-icon-button aria-label="clear" (click)="data.queen.hometown=''">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-form-field>
+
+  <!-- Notes -->
+  <mat-form-field appearance="outline">
+    <mat-label>What's the tea?</mat-label>
+    <textarea matInput
+              [(ngModel)]="data.queen.notes"
+              placeholder="Spill it, queen"></textarea>
+  </mat-form-field>
+
+  <!-- Seasons -->
+  
+  <div class="seasons" *ngIf="data.availableSeasons && data.availableSeasons.length > 0">
+    <mat-form-field>
+      <mat-label>Which seasons?</mat-label>
+      <mat-select placeholder="Seasons" multiple [(ngModel)]="selectedSeasons">
+        <mat-option *ngFor="let season of data.availableSeasons" [value]="season.name">
+          {{season.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <button mat-button (click)="seasonbar.toggle()"><mat-icon>add</mat-icon></button>
+  </div>
+  
+  <!-- <mat-form-field #seasonbar appearance="outline">
+    <mat-label>Add a season</mat-label>
+    <input matInput [formControl]="newSeasonFormControl"/>
+    <button mat-button matSuffix mat-icon-button>
+      <mat-icon>check</mat-icon>
+    </button>
+  </mat-form-field> -->
+</div>
+
+<!-- Dialog Actions -->
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()"> 
+    <mat-icon>close</mat-icon>  
+  </button>
+  <button mat-raised-button color="accent" [mat-dialog-close]="queen" (click)="onSubmit()">
+    <mat-icon>check</mat-icon>
+  </button>
+</div>

@@ -1,0 +1,33 @@
+<h1>Ooooooh, girl!</h1>
+<div *ngIf="queens; else loading">
+  <div *ngIf="queens.length > 0; else noQueens">
+    <div *ngFor="let queen of queens" style="padding:10px">
+      <mat-card matRipple (click)="openCreateEditQueenDialog(queen, seasons)">
+        <mat-card-header>
+          <mat-card-title> {{queen.name}} </mat-card-title>
+          <div class="close"></div>
+        </mat-card-header>
+        <mat-card-content *ngIf="queen.notes">
+          {{queen.notes}}
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+  <button mat-fab matRipple (click)="openCreateEditQueenDialog(null, seasons)"><mat-icon>add</mat-icon></button>
+</div>
+<ng-template #loading>
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title> Loading... </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-progress-bar mode="query"></mat-progress-bar>
+    </mat-card-content>
+  </mat-card>
+</ng-template>
+
+<ng-template #noQueens>
+  <h3>And I oop!</h3>
+  <p>There's nobody here! Click the button below to add some divas</p>
+</ng-template>
+

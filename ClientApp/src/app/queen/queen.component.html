@@ -1,0 +1,11 @@
+<div class="row">
+  <span class="col-md-3"></span> <!-- padding for medium screens -->
+  <mat-card *ngIf="queen" class="col-md-6">
+    <mat-card-header>
+      <mat-card-title> {{queen.name}}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content *ngIf="queen.notes">
+      {{queen.notes}}
+    </mat-card-content>
+  </mat-card>
+</div>
